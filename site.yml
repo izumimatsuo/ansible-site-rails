@@ -1,4 +1,3 @@
-- hosts: all
-  tasks:
-      - name: install apache
-        yum: name=httpd
+---
+- import_playbook: webservers.yml
+- import_playbook: dbservers.yml
