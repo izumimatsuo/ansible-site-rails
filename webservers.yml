@@ -2,3 +2,6 @@
 - hosts: webservers
   roles:
       - apache
+      - ruby
+  vars:
+      ruby_version: 2.5.3
