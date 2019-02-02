@@ -25,6 +25,10 @@ def test_ruby_is_installed(host):
     assert host.exists("ruby")
     assert "2.5" in host.run("ruby -v").stdout
 
+def test_rails_is_installed(host):
+    assert host.exists("rails")
+    assert "5.2.2" in host.run("rails -v").stdout
+
 # dbservers tests
 
 def test_postgresql_is_installed(host):

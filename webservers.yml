@@ -3,5 +3,7 @@
   roles:
       - apache
       - ruby
+      - rails
   vars:
       ruby_version: 2.5.3
+      rails_version: 5.2.2
