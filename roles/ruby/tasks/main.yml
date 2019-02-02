@@ -4,18 +4,18 @@
   tags:
       - ruby
 
-- name: init rbenv to profile
+- name: setup rbenv
   template: src=rbenv.sh.j2 dest=/etc/profile.d/rbenv.sh owner=root group=root mode=0755
   become: true
   tags:
       - ruby
 
-- name: install ruby-build package
+- name: install ruby-build plugin
   git: repo=https://github.com/rbenv/ruby-build dest=/usr/local/src/rbenv/plugins/ruby-build
   tags:
       - ruby
 
-- name: install depends packages
+- name: install ruby-build depends packages
   yum:
       name:
           - bzip2
@@ -26,7 +26,7 @@
   tags:
       - ruby
 
-- name: check ruby installed
+- name: detected ruby package
   shell: bash -lc "rbenv versions | grep {{ ruby_version }}"
   register: ruby_installed
   ignore_errors: yes
@@ -35,13 +35,7 @@
       - ruby
 
 - name: install ruby package
-  command: bash -lc "rbenv install {{ ruby_version }}"
-  when: ruby_installed is failed
-  tags:
-      - ruby
-
-- name: switch new ruby version
-  command: bash -lc "rbenv global {{ ruby_version }}"
+  command: bash -lc "rbenv install {{ ruby_version }} && rbenv global {{ ruby_version }}"
   when: ruby_installed is failed
   tags:
       - ruby
