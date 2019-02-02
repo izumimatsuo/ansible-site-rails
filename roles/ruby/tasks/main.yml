@@ -38,6 +38,6 @@
   tags: ruby
 
 - name: install ruby package
-  command: bash -lc "rbenv install {{ ruby_version }} && rbenv global {{ ruby_version }}"
+  command: bash -lc "rbenv install {{ ruby_version }} && rbenv global {{ ruby_version }} && gem install bundler"
   when: ruby_installed is failed
   tags: ruby
