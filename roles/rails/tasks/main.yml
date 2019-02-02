@@ -4,11 +4,9 @@
   register: rails_installed
   ignore_errors: yes
   changed_when: false
-  tags:
-      - rails
+  tags: rails
 
 - name: install rails package
   command: bash -lc "gem install rails -v {{ rails_version }}"
   when: rails_installed is failed
-  tags:
-      - rails
+  tags: rails

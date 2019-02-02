@@ -1,19 +1,24 @@
 ---
 - name: install rbenv package
-  git: repo=https://github.com/rbenv/rbenv dest=/usr/local/src/rbenv
-  tags:
-      - ruby
+  git:
+      repo: https://github.com/rbenv/rbenv
+      dest: /usr/local/src/rbenv
+  tags: ruby
 
 - name: setup rbenv
-  template: src=rbenv.sh.j2 dest=/etc/profile.d/rbenv.sh owner=root group=root mode=0755
-  become: true
-  tags:
-      - ruby
+  template:
+      src: rbenv.sh.j2
+      dest: /etc/profile.d/rbenv.sh
+      owner: root
+      group: root
+      mode: 0755
+  tags: ruby
 
 - name: install ruby-build plugin
-  git: repo=https://github.com/rbenv/ruby-build dest=/usr/local/src/rbenv/plugins/ruby-build
-  tags:
-      - ruby
+  git:
+      repo: https://github.com/rbenv/ruby-build
+      dest: /usr/local/src/rbenv/plugins/ruby-build
+  tags: ruby
 
 - name: install ruby-build depends packages
   yum:
@@ -23,19 +28,16 @@
           - openssl-devel
           - readline-devel
           - zlib-devel
-  tags:
-      - ruby
+  tags: ruby
 
 - name: detected ruby package
   shell: bash -lc "rbenv versions | grep {{ ruby_version }}"
   register: ruby_installed
   ignore_errors: yes
   changed_when: false
-  tags:
-      - ruby
+  tags: ruby
 
 - name: install ruby package
   command: bash -lc "rbenv install {{ ruby_version }} && rbenv global {{ ruby_version }}"
   when: ruby_installed is failed
-  tags:
-      - ruby
+  tags: ruby

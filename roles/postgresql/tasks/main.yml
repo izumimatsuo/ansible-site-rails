@@ -1,16 +1,18 @@
 ---
 - name: install postgresql repository
-  yum: name=https://download.postgresql.org/pub/repos/yum/9.6/redhat/rhel-7-x86_64/pgdg-centos96-9.6-3.noarch.rpm
+  yum:
+      name: https://download.postgresql.org/pub/repos/yum/9.6/redhat/rhel-7-x86_64/pgdg-centos96-9.6-3.noarch.rpm
 
 - name: install postgresql package
   yum:
-    name:
-      - postgresql96-server
-      - postgresql96-devel
-      - postgresql96-contrib 
+      name:
+          - postgresql96-server
+          - postgresql96-devel
+          - postgresql96-contrib 
   tags: postgresql
 
-- stat: path=/var/lib/pgsql/9.6/data/PG_VERSION
+- stat:
+    path: /var/lib/pgsql/9.6/data/PG_VERSION
   register: dbcluster
   tags: postgresql
 
@@ -20,5 +22,8 @@
   tags: postgresql
 
 - name: start postgresql service
-  service: name=postgresql-9.6 state=started enabled=yes
+  service:
+      name: postgresql-9.6
+      state: started
+      enabled: yes
   tags: postgresql
