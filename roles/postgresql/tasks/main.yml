@@ -1,8 +1,8 @@
 ---
-- name: install yum repository
+- name: install postgresql repository
   yum: name=https://download.postgresql.org/pub/repos/yum/9.6/redhat/rhel-7-x86_64/pgdg-centos96-9.6-3.noarch.rpm
 
-- name: install postgresql
+- name: install postgresql package
   yum:
     name:
       - postgresql96-server
@@ -14,7 +14,7 @@
   register: dbcluster
   tags: postgresql
 
-- name: initdb
+- name: setup postgresql
   shell: /usr/pgsql-9.6/bin/postgresql96-setup initdb
   when: not dbcluster.stat.exists
   tags: postgresql
