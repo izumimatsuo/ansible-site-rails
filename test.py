@@ -1,5 +1,11 @@
 # -*- coding:utf8 -*-
 
+# system tests
+
+def test_system_info(host):
+    assert host.system_info.distribution == "centos"
+    assert "7.6" in host.run("cat /etc/redhat-release").stdout
+
 # webservers tests
 
 def test_apache_is_installed(host):
@@ -11,6 +17,9 @@ def test_apache_running_and_enabled(host):
     httpd = host.service("httpd")
     assert httpd.is_running
     assert httpd.is_enabled
+
+def test_apache_is_listening(host):
+    assert host.socket("tcp://0.0.0.0:80").is_listening
 
 def test_ruby_is_installed(host):
     assert host.exists("ruby")
