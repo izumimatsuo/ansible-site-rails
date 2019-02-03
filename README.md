@@ -1,13 +1,16 @@
 # ansible-site-rails
 
 Rails アプリケーションを開発する際に必要な環境を構築する。
-以下のソフトウェアで構成。
+以下のソフトウェアで構成する。
 
-* CentOS 7.6
-* Apache Httpd 2.4
-* Phusion Passenger (mod_rails) 5.2
-* Ruby on Rails 5.2 (ruby 2.5)
-* PostgreSQL 9.6
+* CentOS
+* Apache Httpd
+* Ruby
+* Phusion Passenger
+* Ruby on Rails (Rails)
+* PostgreSQL
+
+なお、Rails はアプリケーションプロジェクトの vendor/bundle にインストールする。
 
 ## 環境構築手順
 
@@ -17,7 +20,7 @@ Rails アプリケーションを開発する際に必要な環境を構築す�
 # ./provision.sh
 ```
 
-## アプリケーション開発例
+## アプリケーション作成例
 
 ### PostgreSQL の設定
 
@@ -37,23 +40,27 @@ local の認証方式を peer から md5 へ変更する。
 # systemctl restart postgresql-9.6
 ```
 
-### アプリケーションの生成
+### アプリケーション作成
 
-土台となる雛形を生成する。
+アプリケーションプロジェクト（実行環境）を作成する。
 
 ```
 # cd /var/www/html
-# rails new demo -d postgresql
+# mkdir demo
 # cd demo
+# bundle init
+# sed -i 's/#\s*\(.*rails\)/\1/g' Gemfile
+# bundle install --path vendor/bundle
+# bundle exec rails new . -B -d postgresql --skip-turbolinks --skip-test
 # sed -i 's/#\s*\(.*mini_racer\)/\1/g' Gemfile
 # export PATH=/usr/pgsql-9.6/bin:$PATH
 # bundle install
 ```
 
-簡易なブログアプリケーションを生成する。
+簡易なアプリケーションを自動生成する。
 
 ```
-# rails generate scaffold Blog title:string content:text
+# bundle exec rails generate scaffold Blog title:string content:text
 ```
 
 データベースのマイグレーション処理を実行する。
@@ -61,8 +68,8 @@ local の認証方式を peer から md5 へ変更する。
 ```
 # sed -i 's/#\(username:\)/\1/g' config/database.yml
 # sed -i 's/#\(password:\)/\1 demo/g' config/database.yml
-# rake db:create RAILS_ENV=development
-# rake db:migrate RAILS_ENV=development
+# bundle exec rake db:create RAILS_ENV=development
+# bundle exec rake db:migrate RAILS_ENV=development
 ```
 
 アプリケーションの実行権限を調整する。
@@ -90,3 +97,4 @@ EOF
 # systemctl restart httpd
 ```
 
+http://localhost:8080/blogs へアクセスしてアプリケーションの動作確認をする。
