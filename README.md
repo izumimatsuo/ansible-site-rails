@@ -16,7 +16,7 @@ Rails アプリケーションを開発する際に必要な環境を構築す�
 
 ```
 # git clone https://github.com/izumimatsuo/ansible-site-rails
-# ce ansible-site-rails
+# cd ansible-site-rails
 # ./provision.sh
 ```
 
