@@ -20,7 +20,3 @@ def test_ruby_is_installed(host):
 def test_passenger_is_installed(host):
     assert host.exists("passenger")
     assert "5.2.2" in host.run("passenger -v").stdout
-
-def test_rails_is_installed(host):
-    assert host.exists("rails")
-    assert "5.2.2" in host.run("rails -v").stdout
