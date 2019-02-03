@@ -11,7 +11,8 @@
           - postgresql96-contrib 
   tags: postgresql
 
-- stat:
+- name: detect postgresql version file
+  stat:
     path: /var/lib/pgsql/9.6/data/PG_VERSION
   register: dbcluster
   tags: postgresql
