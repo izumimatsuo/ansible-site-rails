@@ -1,0 +1,5 @@
+---
+- hosts: web-servers
+  roles:
+      - apache2
+      - passenger

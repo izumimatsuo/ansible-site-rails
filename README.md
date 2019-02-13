@@ -7,7 +7,6 @@ Rails アプリケーションを開発する際に必要な環境を構築す�
 * Apache Httpd
 * Ruby
 * Phusion Passenger
-* Ruby on Rails (Rails)
 * PostgreSQL
 
 なお、Rails はアプリケーションプロジェクトの vendor/bundle にインストールする。
@@ -76,7 +75,7 @@ local の認証方式を peer から md5 へ変更する。
 
 ```
 # cd ..
-# chown -R postgres:postgres demo
+# chown -R apache:apache demo
 ```
 
 アプリケーションを Web で実行できるように設定する。

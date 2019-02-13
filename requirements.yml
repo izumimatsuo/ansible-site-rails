@@ -1,0 +1,9 @@
+---
+- src: https://github.com/izumimatsuo/ansible-role-apache2
+  name: apache2
+
+- src: https://github.com/izumimatsuo/ansible-role-passenger
+  name: passenger
+
+- src: https://github.com/izumimatsuo/ansible-role-postgresql
+  name: postgresql

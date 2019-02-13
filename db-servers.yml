@@ -1,4 +1,4 @@
 ---
-- hosts: dbservers
+- hosts: db-servers
   roles:
       - postgresql

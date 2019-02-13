@@ -1,3 +1,4 @@
 ---
-- import_playbook: webservers.yml
-- import_playbook: dbservers.yml
+- import_playbook: init-servers.yml
+- import_playbook: web-servers.yml
+- import_playbook: db-servers.yml

@@ -1,8 +1,8 @@
 [target]
 localhost ansible_connection=local
 
-[webservers:children]
+[web-servers:children]
 target
 
-[dbservers:children]
+[db-servers:children]
 target
